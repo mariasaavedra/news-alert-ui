@@ -10,7 +10,6 @@ export default function DashboardController(DashboardService, $scope, $mdDialog)
 
     function getSelectedText () {
       if (vm.selectedItem !== undefined) {
-          alert("hello");
         return vm.selectedItem;
       } else {
         return "Please select a category";

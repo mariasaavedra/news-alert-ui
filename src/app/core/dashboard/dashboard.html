@@ -3,15 +3,15 @@
         <h3 style="margin: 2rem 0; display: block;">Post New Article</h3>
         <md-input-container>
                 <label>Title</label>
-                <input name="title" ng-value="modal.article.title">
+                <input name="title" ng-value="modal.article.title | htmlToPlaintext">
         </md-input-container>
         <md-input-container>
                 <label>Description</label>
-                <input name="description" ng-value="modal.article.excerpt">
+                <input name="description" ng-value="modal.article.excerpt | htmlToPlaintext">
         </md-input-container>
         <md-input-container>
                 <label>Website Link</label>
-                <input name="link"  ng-value="modal.article.href">
+                <input name="link"  ng-value="modal.article.href | htmlToPlaintext">
         </md-input-container>
         <md-switch ng-model="data.cb1" aria-label="Switch 1">
                 Post to Facebook
