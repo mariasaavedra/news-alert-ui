@@ -1,15 +1,20 @@
-<div class="navbar"></div>
+<div class="navbar">
+    <a href="#">Dashboard</a>
+    <a href="#">Live Site</a>
+    <a href="#">Settings</a>
+    <a href="#">Logout</a>
+</div>
 <div class="dashboard-wrapper">
     
     <div class="dashboard">
         <div class="feed">
 
-        <div class="select-category" style="padding: 0 2rem;">
+        <div class="select-category" style="padding-right: 1rem;">
                 <md-input-container>
                     <label>Categories</label>
-                    <md-select ng-model="dashboard.selectedItem" md-selected-text="dashboard.getSelectedText()">
+                    <md-select ng-model="dashboard.selectedCategory" md-selected-text="dashboard.getSelected(dashboard.selectedCategory)">
                     <md-optgroup label="categories">
-                        <md-option ng-value="item" ng-repeat="item in dashboard.items">{{item}}</md-option>
+                        <md-option ng-value="category" ng-repeat="category in dashboard.categories">{{category}}</md-option>
                     </md-optgroup>
                     </md-select>
                 </md-input-container>
@@ -25,8 +30,8 @@
         </div>
 
         <div class="feed-preview">
-            <!--<iframe src="{{dashboard.article.href}}" width="100%" height="100%"></iframe>-->
-            <md-button class="md-primary md-raised" ng-click="dashboard.showAdvanced($event)">
+            <iframe src="{{dashboard.article.href}}" width="100%" height="100%"></iframe>
+            <md-button class="md-primary md-raised" ng-click="dashboard.showModal($event)">
                 Post Article
             </md-button>
         </div>

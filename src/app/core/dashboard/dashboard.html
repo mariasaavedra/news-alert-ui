@@ -1,17 +1,17 @@
 <md-dialog aria-label="dashboard">
-    <md-dialog-content style="width: 60vw; height: 70vh;">
+    <md-dialog-content style="width: 60vw; height: 80vh;">
         <h3 style="margin: 2rem 0; display: block;">Post New Article</h3>
         <md-input-container>
                 <label>Title</label>
                 <input name="title" ng-value="modal.article.title | htmlToPlaintext">
         </md-input-container>
         <md-input-container>
-                <label>Description</label>
-                <input name="description" ng-value="modal.article.excerpt | htmlToPlaintext">
-        </md-input-container>
-        <md-input-container>
                 <label>Website Link</label>
                 <input name="link"  ng-value="modal.article.href | htmlToPlaintext">
+        </md-input-container>
+        <md-input-container>
+                <label>Description</label>
+                <textarea name="description" ng-value="modal.article.excerpt | htmlToPlaintext"></textarea>
         </md-input-container>
         <md-switch ng-model="data.cb1" aria-label="Switch 1">
                 Post to Facebook
@@ -22,8 +22,8 @@
         <md-switch ng-model="data.cb3" aria-label="Switch 1">
                 Post to Instagram
         </md-switch>
-        <md-button class="md-primary md-raised" ng-click="dashboard.showAdvanced($event)">
+        <md-button class="md-primary md-raised" ng-click="modal.savePost(modal)">
                 Share
-            </md-button>
+        </md-button>
     </md-dialog-content>
 </md-dialog>
