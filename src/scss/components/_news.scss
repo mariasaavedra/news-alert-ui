@@ -1,0 +1,42 @@
+
+.news-grid {
+    display: flex; /* or inline-flex */
+    flex-wrap: wrap;
+    position: relative;
+    margin: 0 auto;
+    max-width: 80vw;
+    outline: 0;
+    &__item {
+        width: 100%;
+        max-width: 250px;
+        height: 250px;
+        background: indigo;
+        padding: 2rem;
+        margin: 1rem;
+        position: relative;
+        outline: 0;
+        &.weather {
+            background: #56BAFF;
+        }
+        &.sports {
+            background: #3EB073;
+        }
+        &.civic {
+            background: #FF9C00;
+        }
+    }
+    .item-title {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+    .item-source {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        color: #fff;
+    }
+}
