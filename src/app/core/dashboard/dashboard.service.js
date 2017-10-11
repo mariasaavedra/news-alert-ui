@@ -1,6 +1,6 @@
 export default function DashboardService($window, $http) {
     var service = {
-        getXML: getXML
+        getXML: getXML,
     };
 
     function getXML(url){

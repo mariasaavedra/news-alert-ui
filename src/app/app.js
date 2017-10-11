@@ -5,11 +5,13 @@ import aria from 'angular-aria';
 import messages from 'angular-messages';
 import ngMaterial from 'angular-material';
 import core from './core/index.js';
+import data from './data/index.js';
 
 angular.module('app', [
         'ngMaterial',
         'ui.router',
-        'core'
+        'core',
+        'data'
     ])
     .config(config)
     .run(run)
@@ -27,7 +29,7 @@ function config($stateProvider, $httpProvider, $urlRouterProvider, $locationProv
         .state('home', {
             url: '/home',
             template: require('./views/public/home.html'),
-            controller: "DashboardController as home",
+            controller: "HomeController as home",
         })
         .state('dashboard', {
             url: '/dashboard',
