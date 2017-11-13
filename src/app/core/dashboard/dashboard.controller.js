@@ -4,36 +4,67 @@ export default function DashboardController(DashboardService, PostService, $mdDi
     vm.article = {};
     vm.setArticle = setArticle;
     vm.getSelected = getSelected;
-    vm.categories = ["Sports", "Business", "Pop Culture", "Civic"];
+    vm.categories = ["All", "Sports", "Business", "Pop Culture", "Civic"];
     vm.selectedCategory = vm.categories[0];
     vm.showModal = showModal;
     vm.savePost = savePost;
-
+    
     init();
 
     function init(){
-        setCategory("https://www.google.com/alerts/feeds/17364175491094000847/7025728249945119546");
+        sports();
     }
+
+    function sports(){
+        // Chiefs KSHB
+        DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30240").then(function(response){
+            parseArticle(response.data, "kshb"); 
+        });
+        // Sporting KC KSHB
+        DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=76125").then(function(response){
+            parseArticle(response.data, "kshb"); 
+        });
+        // Royals KSHB
+        DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30175").then(function(response){
+            parseArticle(response.data, "kshb"); 
+        });
+    }
+    
 
     function setArticle(article){
         vm.article = article;
     }
 
-    function parseArticle(data){
+    function parseArticle(data, source){
         var article = {}; 
         xml2js.parseString(data, function (err, result) {
-            var xml = result.feed.entry;
+            var xml;
             var articles = [];
-            _.each(xml, function(article) {
-                var a = {
-                    title: article.title[0]._,
-                    description: article.content[0]._,
-                    published: article.published[0]._,
-                    url: parseURL(article.link[0].$.href)
-                }
-                vm.articles.push(a);
-            });
-            setArticle(vm.articles[0]);
+            source.toLowerCase();
+            switch (source){
+                case "kshb":
+                    xml = result.rss.channel[0].item;
+                    _.each(xml, function(article) {
+                        var a = {
+                            title: article.title[0],
+                            description: article.description[0],
+                            published: article.pubDate[0],
+                            url: article.link[0]
+                        }
+                        vm.articles.push(a);
+                    });
+                    break;
+                case "startland":
+                    xml = result.rss.channel[0].item;
+                    break;
+                default: 
+                    xml = result.rss.channel;
+                    break;
+            }
+
+            
+            
+            //setArticle(vm.articles[0]);
         });
     }
 
