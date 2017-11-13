@@ -12,7 +12,18 @@ export default function DashboardController(DashboardService, PostService, $mdDi
     init();
 
     function init(){
-        sports();
+        
+        DashboardService.getXML("http://www.startlandnews.com/category/startups/feed").then(function(response){
+            parseArticle(response.data, "startland"); 
+        });
+        DashboardService.getXML("http://www.startlandnews.com/category/education/feed").then(function(response){
+            parseArticle(response.data, "startland"); 
+        });
+
+        DashboardService.getXML("http://www.startlandnews.com/category/government/feed").then(function(response){
+            parseArticle(response.data, "startland"); 
+        });
+        
     }
 
     function sports(){
@@ -42,7 +53,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
             var articles = [];
             source.toLowerCase();
             switch (source){
-                case "kshb":
+                case "kshb" || "startland":
                     xml = result.rss.channel[0].item;
                     _.each(xml, function(article) {
                         var a = {
@@ -56,6 +67,16 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                     break;
                 case "startland":
                     xml = result.rss.channel[0].item;
+                    _.each(xml, function(article) {
+                        console.log(article);
+                        var a = {
+                            title: article.title[0],
+                            description: article.description[0],
+                            published: article.pubDate[0],
+                            url: article.link[0]
+                        }
+                        vm.articles.push(a);
+                    });
                     break;
                 default: 
                     xml = result.rss.channel;
