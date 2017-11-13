@@ -21,13 +21,13 @@
                 <label>Description</label>
                 <textarea name="description" ng-model="modal.article.description" ng-value="modal.article.description | htmlToPlaintext"></textarea>
         </md-input-container>
-        <md-switch ng-model="data.cb1" aria-label="Switch 1">
+        <md-switch ng-model="modal.article.facebook" aria-label="Post to Facebook">
                 Post to Facebook
         </md-switch>
-        <md-switch ng-model="data.cb2" aria-label="Switch 1">
+        <md-switch ng-model="modal.article.twitter" aria-label="Post to Twitter">
                 Post to Twitter
         </md-switch>
-        <md-switch ng-model="data.cb3" aria-label="Switch 1">
+        <md-switch ng-model="modal.article.instagram" aria-label="Post to Instagram">
                 Post to Instagram
         </md-switch>
         <md-button class="md-primary md-raised" style="float: right;" ng-click="modal.savePost(modal.article)">
