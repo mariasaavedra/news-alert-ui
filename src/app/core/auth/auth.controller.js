@@ -10,7 +10,7 @@ export default function AuthController(AuthService, $window, $http) {
     function me(){
         $http({
             method: 'POST',
-            url: 'http://192.168.10.10/api/v1/auth/login',
+            url: 'http://192.168.10.10/api/v1/auth/me',
             headers: {
                 'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest',
@@ -20,6 +20,8 @@ export default function AuthController(AuthService, $window, $http) {
            console.log("auth", response);
         });
     }
+
+    vm.me();
 
     function login() {
         var credentials = {
