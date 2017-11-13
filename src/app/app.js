@@ -24,7 +24,7 @@ function config($stateProvider, $httpProvider, $urlRouterProvider, $locationProv
         .state('login', {
             url: '/login',
             template: require('./views/public/login.html'),
-            controller: "LoginController as login",
+            controller: "AuthController as auth",
         })
         .state('home', {
             url: '/home',
