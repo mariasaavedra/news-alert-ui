@@ -79,8 +79,8 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                             this.title = article.title[0];
                             this.description = article.description[0];
                             this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
-                            this.duration = moment(this.published).from(moment());
-                            this.timestamp = moment(this.published).valueOf();
+                            this.duration = moment(article.pubDate[0]).from(moment());
+                            this.timestamp = moment(article.pubDate[0]).valueOf();
                             this.url = article.link[0];
                             this.source = 'KSHB';
                         }
@@ -95,8 +95,8 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                             this.title = article.title[0];
                             this.description = article.description[0];
                             this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
-                            this.duration = moment(this.ublished).from(moment());
-                            this.timestamp = moment(this.published).valueOf();
+                            this.duration = moment(this.published).from(moment());
+                            this.timestamp = moment(article.pubDate[0]).valueOf();
                             this.url = article.link[0];
                             this.source = 'Startland News';
                         }
