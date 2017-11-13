@@ -12,18 +12,35 @@ export default function DashboardController(DashboardService, PostService, $mdDi
     init();
 
     function init(){
-        
+    }
+
+    function technology(){
+        // Startland Startups
         DashboardService.getXML("http://www.startlandnews.com/category/startups/feed").then(function(response){
             parseArticle(response.data, "startland"); 
         });
+    }
+    function community(){
+        // Startland Education
         DashboardService.getXML("http://www.startlandnews.com/category/education/feed").then(function(response){
             parseArticle(response.data, "startland"); 
         });
-
+        // Startland Government
         DashboardService.getXML("http://www.startlandnews.com/category/government/feed").then(function(response){
             parseArticle(response.data, "startland"); 
         });
-        
+        // Local News KSHB
+        DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=20000").then(function(response){
+            parseArticle(response.data, "kshb"); 
+        });
+        // Johnson County KSHB
+        DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30293").then(function(response){
+            parseArticle(response.data, "kshb"); 
+        });
+        // Jackson County KSHB
+        DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30302").then(function(response){
+            parseArticle(response.data, "kshb"); 
+        });
     }
 
     function sports(){
@@ -134,5 +151,16 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                 swal('Error!', 'Your article was not saved. Please try again.','error');
             }
         });
+
+        if(article.facebook == true){
+            var post = {
+                href: article.url,
+                title: article.title
+            }
+            DashboardService.shareFacebook(post).then(function(response){
+                console.log(response);
+            });
+        }
+
     }
 }
