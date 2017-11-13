@@ -1,17 +1,25 @@
 <md-dialog aria-label="dashboard">
-    <md-dialog-content style="width: 60vw; height: 80vh;">
+    <md-dialog-content style="width: 60vw; height: 90vh; position: relative;">
         <h3 style="margin: 2rem 0; display: block;">Post New Article</h3>
         <md-input-container>
                 <label>Title</label>
                 <input name="title" ng-value="modal.article.title | htmlToPlaintext">
         </md-input-container>
         <md-input-container>
+                <label>Categories</label>
+                <md-select ng-model="modal.selectedCategory" md-selected-text="modal.getSelected(modal.selectedCategory)" style="margin-bottom: 1rem;">
+                <md-optgroup label="categories">
+                    <md-option ng-value="category" ng-repeat="category in modal.categories">{{category}}</md-option>
+                </md-optgroup>
+                </md-select>
+        </md-input-container>
+        <md-input-container>
                 <label>Website Link</label>
-                <input name="link"  ng-value="modal.article.href | htmlToPlaintext">
+                <input name="link"  ng-value="modal.article.url | htmlToPlaintext">
         </md-input-container>
         <md-input-container>
                 <label>Description</label>
-                <textarea name="description" ng-value="modal.article.excerpt | htmlToPlaintext"></textarea>
+                <textarea name="description" ng-value="modal.article.description | htmlToPlaintext"></textarea>
         </md-input-container>
         <md-switch ng-model="data.cb1" aria-label="Switch 1">
                 Post to Facebook
@@ -22,7 +30,7 @@
         <md-switch ng-model="data.cb3" aria-label="Switch 1">
                 Post to Instagram
         </md-switch>
-        <md-button class="md-primary md-raised" ng-click="modal.savePost(modal)">
+        <md-button class="md-primary md-raised" style="float: right;" ng-click="modal.savePost(modal.article)">
                 Share
         </md-button>
     </md-dialog-content>

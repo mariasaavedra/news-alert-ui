@@ -1,16 +1,16 @@
 <div class="login-wrapper">
     <div class="login-card">
-        <h3 style="color: #fff" >Sign In</h3>
+        <h3>Sign In</h3>
         <div class="login-card__field">
             <label>Username</label>
-            <input type="text">
+            <input type="text" ng-model="auth.user.name">
         </div>
         <div class="login-card__field">
             <label>Password</label>
-            <input type="password">
+            <input type="password" ng-model="auth.user.password">
         </div>
         <p>Forgot your password?</p>
-        <a href="#" class="btn btn-solid">Sign In</a>
+        <md-button class="md-primary md-raised" style="width: 100%;" ng-click="auth.login(auth.user)">Sign In</md-button>
     </div>
 
 </div>

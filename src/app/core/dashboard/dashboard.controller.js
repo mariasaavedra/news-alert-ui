@@ -27,9 +27,9 @@ export default function DashboardController(DashboardService, PostService, $mdDi
             _.each(xml, function(article) {
                 var a = {
                     title: article.title[0]._,
-                    excerpt: article.content[0]._,
+                    description: article.content[0]._,
                     published: article.published[0]._,
-                    href: parseURL(article.link[0].$.href)
+                    url: parseURL(article.link[0].$.href)
                 }
                 vm.articles.push(a);
             });
@@ -71,15 +71,10 @@ export default function DashboardController(DashboardService, PostService, $mdDi
         });
     }
 
-    function savePost(modal){
-        var article = {
-            "title": "Title",
-            "description": "Description",
-            "image": "Image",
-            "url": "Url",
-            "category_id": 1
-        }
-        PostService.savePost().then(function(response){
+    function savePost(article){
+        article.category_id = 1;
+        article.image = 'image.jpg';
+        PostService.savePost(article).then(function(response){
             if(response.status == 201){
                 $mdDialog.hide();
                 swal('Success!', 'Your article has been posted.','success');

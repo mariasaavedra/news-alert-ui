@@ -25,12 +25,12 @@
                     <span ng-bind="article.source"></span> 
                     <span style="margin-left: .5rem" ng-bind="article.date_since"></span>
                 </p> -->
-                <p class="feed-item__excerpt" ng-bind-html="article.excerpt"></p>
+                <p class="feed-item__excerpt" ng-bind-html="article.description"></p>
             </div>
         </div>
 
         <div class="feed-preview">
-            <iframe src="{{dashboard.article.href}}" width="100%" height="100%"></iframe>
+            <iframe src="{{dashboard.article.url}}" width="100%" height="100%"></iframe>
             <md-button class="md-primary md-raised" ng-click="dashboard.showModal($event)">
                 Post Article
             </md-button>
