@@ -1,6 +1,25 @@
-export default function AuthController(AuthService, $http) {
+export default function AuthController(AuthService, $window, $http) {
     var vm = this;
     vm.login = login;
+    vm.me = me;
+    vm.getToken = getToken;
+
+    function getToken(){
+        return $window.localStorage.getItem('access_token');
+    }
+    function me(){
+        $http({
+            method: 'POST',
+            url: 'http://192.168.10.10/api/v1/auth/login',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Authorization': 'Bearer ' +  getToken()
+            }
+        }).then(function successCallback(response) {
+           console.log("auth", response);
+        });
+    }
 
     function login() {
         var credentials = {
@@ -16,11 +35,8 @@ export default function AuthController(AuthService, $http) {
                 'X-Requested-With': 'XMLHttpRequest'
             }
         }).then(function successCallback(response) {
-           console.log("auth", response);
-           $window.localStorage.setItem('token', response.data.token);
-           $state.go('dashboard');
+           $window.localStorage.setItem('access_token', response.data.access_token);
         }, function errorCallback(response) {
-            // return "Login failed, check username or password.";
             swal({
                 title: "Login Failed!",
                 text: "Please check that your username and password are correct.",
