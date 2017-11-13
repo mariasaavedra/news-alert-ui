@@ -1,4 +1,4 @@
-export default function AuthController(AuthService, $window, $http) {
+export default function AuthController(AuthService, $window, $http, $state) {
     var vm = this;
     vm.login = login;
     vm.me = me;
@@ -38,6 +38,7 @@ export default function AuthController(AuthService, $window, $http) {
             }
         }).then(function successCallback(response) {
            $window.localStorage.setItem('access_token', response.data.access_token);
+           $state.go('dashboard');
         }, function errorCallback(response) {
             swal({
                 title: "Login Failed!",
