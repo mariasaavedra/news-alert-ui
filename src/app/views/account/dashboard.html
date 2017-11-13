@@ -19,12 +19,13 @@
                     </md-select>
                 </md-input-container>
             </div>
-            <div class="feed-item" ng-repeat="article in dashboard.articles" ng-click="dashboard.setArticle(article)">
+            <div class="feed-item" ng-repeat="article in dashboard.articles | orderBy: '-timestamp'" ng-click="dashboard.setArticle(article)">
                 <p class="feed-item__title" ng-bind-html="article.title"></p>
-                <!--<p class="feed-item__source">
+                <p class="feed-item__source">
                     <span ng-bind="article.source"></span> 
-                    <span style="margin-left: .5rem" ng-bind="article.date_since"></span>
-                </p> -->
+                    <span style="margin-left: .5rem" ng-bind="article.published"></span>
+                    <span style="margin-left: .5rem" ng-bind="article.duration"></span>
+                </p>
                 <p class="feed-item__excerpt" ng-bind-html="article.description"></p>
             </div>
         </div>

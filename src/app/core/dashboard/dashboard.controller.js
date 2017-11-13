@@ -12,6 +12,8 @@ export default function DashboardController(DashboardService, PostService, $mdDi
     init();
 
     function init(){
+        sports();
+        community();
     }
 
     function technology(){
@@ -73,11 +75,14 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                 case "kshb" || "startland":
                     xml = result.rss.channel[0].item;
                     _.each(xml, function(article) {
-                        var a = {
-                            title: article.title[0],
-                            description: article.description[0],
-                            published: article.pubDate[0],
-                            url: article.link[0]
+                        var a = new function() {
+                            this.title = article.title[0];
+                            this.description = article.description[0];
+                            this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
+                            this.duration = moment(this.published).from(moment());
+                            this.timestamp = moment(this.published).valueOf();
+                            this.url = article.link[0];
+                            this.source = 'KSHB';
                         }
                         vm.articles.push(a);
                     });
@@ -86,11 +91,14 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                     xml = result.rss.channel[0].item;
                     _.each(xml, function(article) {
                         console.log(article);
-                        var a = {
-                            title: article.title[0],
-                            description: article.description[0],
-                            published: article.pubDate[0],
-                            url: article.link[0]
+                        var a = new function() {
+                            this.title = article.title[0];
+                            this.description = article.description[0];
+                            this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
+                            this.duration = moment(this.ublished).from(moment());
+                            this.timestamp = moment(this.published).valueOf();
+                            this.url = article.link[0];
+                            this.source = 'Startland News';
                         }
                         vm.articles.push(a);
                     });
