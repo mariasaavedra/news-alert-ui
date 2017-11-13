@@ -4,7 +4,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
     vm.article = {};
     vm.setArticle = setArticle;
     vm.getSelected = getSelected;
-    vm.categories = ["All", "Sports", "Business", "Pop Culture", "Civic"];
+    vm.categories = ["Sports", "Business", "Technology", "Community"];
     vm.selectedCategory = vm.categories[0];
     vm.showModal = showModal;
     vm.savePost = savePost;
@@ -13,46 +13,47 @@ export default function DashboardController(DashboardService, PostService, $mdDi
 
     function init(){
         sports();
+        technology();
         community();
     }
 
     function technology(){
         // Startland Startups
         DashboardService.getXML("http://www.startlandnews.com/category/startups/feed").then(function(response){
-            parseArticle(response.data, "startland"); 
+            parseArticle(response.data, "startland", 3); 
         });
     }
     function community(){
         // Startland Education
         DashboardService.getXML("http://www.startlandnews.com/category/education/feed").then(function(response){
-            parseArticle(response.data, "startland"); 
+            parseArticle(response.data, "startland", 4); 
         });
         // Startland Government
         DashboardService.getXML("http://www.startlandnews.com/category/government/feed").then(function(response){
-            parseArticle(response.data, "startland"); 
+            parseArticle(response.data, "startland", 4); 
         });
         // Johnson County KSHB
         DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30293").then(function(response){
-            parseArticle(response.data, "kshb"); 
+            parseArticle(response.data, "kshb", 4); 
         });
         // Jackson County KSHB
         DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30302").then(function(response){
-            parseArticle(response.data, "kshb"); 
+            parseArticle(response.data, "kshb", 4); 
         });
     }
 
     function sports(){
         // Chiefs KSHB
         DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30240").then(function(response){
-            parseArticle(response.data, "kshb"); 
+            parseArticle(response.data, "kshb", 1); 
         });
         // Sporting KC KSHB
         DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=76125").then(function(response){
-            parseArticle(response.data, "kshb"); 
+            parseArticle(response.data, "kshb", 1); 
         });
         // Royals KSHB
         DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30175").then(function(response){
-            parseArticle(response.data, "kshb"); 
+            parseArticle(response.data, "kshb", 1); 
         });
     }
     
@@ -61,7 +62,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
         vm.article = article;
     }
 
-    function parseArticle(data, source){
+    function parseArticle(data, source, category){
         var article = {}; 
         xml2js.parseString(data, function (err, result) {
             var xml;
@@ -73,6 +74,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                     _.each(xml, function(article) {
                         var a = new function() {
                             this.title = article.title[0];
+                            this.category = category;
                             this.description = article.description[0];
                             this.excerpt = this.description.substring(0,140) + "...";
                             this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
@@ -90,6 +92,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                         console.log(article);
                         var a = new function() {
                             this.title = article.title[0];
+                            this.category = category;
                             this.description = article.description[0];
                             this.excerpt = this.description.substring(0,140) + "...";
                             this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
@@ -147,7 +150,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
     }
 
     function savePost(article){
-        article.category_id = 1;
+        article.category_id = article.category;
         article.image = 'image.jpg';
         PostService.savePost(article).then(function(response){
             if(response.status == 201){

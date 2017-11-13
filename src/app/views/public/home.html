@@ -1,6 +1,6 @@
 <div class="home-wrapper">
     <div class="news-grid">
-        <a ng-href="{{news.url}}" class="news-grid__item" ng-class="news.tag" ng-repeat="news in home.news">
+        <a ng-href="{{news.url}}" class="news-grid__item" ng-class="{'sports': {{news.category_id == 1}}, 'business': {{news.category_id == 2}}, 'technology': {{news.category_id == 3}}, 'community': {{news.category_id == 4}} }" ng-repeat="news in home.news">
             <p class="item-title" ng-bind="news.title | htmlToPlaintext"></p>
             <p class="item-source" ng-bind="news.source"></p>
         </a>

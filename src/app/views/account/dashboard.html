@@ -9,7 +9,7 @@
     <div class="dashboard">
         <div class="feed">
 
-        <div class="select-category" style="padding-right: 1rem;">
+        <!--<div class="select-category" style="padding-right: 1rem;">
                 <md-input-container>
                     <label>Categories</label>
                     <md-select ng-model="dashboard.selectedCategory" md-selected-text="dashboard.getSelected(dashboard.selectedCategory)">
@@ -19,6 +19,7 @@
                     </md-select>
                 </md-input-container>
             </div>
+        -->
             <div class="feed-item" ng-repeat="article in dashboard.articles | orderBy: '-timestamp'" ng-click="dashboard.setArticle(article)">
                 <p class="feed-item__title" ng-bind-html="article.title"></p>
                 <p class="feed-item__source">

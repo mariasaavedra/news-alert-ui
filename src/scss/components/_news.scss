@@ -17,13 +17,16 @@
         margin: 1rem;
         position: relative;
         outline: 0;
-        &.weather {
+        &.sports {
             background: #56BAFF;
         }
-        &.sports {
+        &.business {
             background: #3EB073;
         }
-        &.civic {
+        &.technology {
+            background: #333;
+        }
+        &.community {
             background: #FF9C00;
         }
     }
