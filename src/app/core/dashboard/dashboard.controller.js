@@ -76,6 +76,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                     xml = result.rss.channel[0].item;
                     _.each(xml, function(article) {
                         var a = new function() {
+                            // test
                             this.title = article.title[0];
                             this.description = article.description[0];
                             this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
