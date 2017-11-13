@@ -31,10 +31,6 @@ export default function DashboardController(DashboardService, PostService, $mdDi
         DashboardService.getXML("http://www.startlandnews.com/category/government/feed").then(function(response){
             parseArticle(response.data, "startland"); 
         });
-        // Local News KSHB
-        DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=20000").then(function(response){
-            parseArticle(response.data, "kshb"); 
-        });
         // Johnson County KSHB
         DashboardService.getXML("http://www.kshb.com/feeds/rssFeed?obfType=RSS_FEED&siteId=10014&categoryId=30293").then(function(response){
             parseArticle(response.data, "kshb"); 
@@ -78,6 +74,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                         var a = new function() {
                             this.title = article.title[0];
                             this.description = article.description[0];
+                            this.excerpt = this.description.substring(0,140) + "...";
                             this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
                             this.duration = moment(article.pubDate[0]).from(moment());
                             this.timestamp = moment(article.pubDate[0]).valueOf();
@@ -94,6 +91,7 @@ export default function DashboardController(DashboardService, PostService, $mdDi
                         var a = new function() {
                             this.title = article.title[0];
                             this.description = article.description[0];
+                            this.excerpt = this.description.substring(0,140) + "...";
                             this.published = moment.parseZone(article.pubDate[0]).local().format("MM/DD/YYYY h:mm a");
                             this.duration = moment(article.pubDate[0]).from(moment());
                             this.timestamp = moment(article.pubDate[0]).valueOf();

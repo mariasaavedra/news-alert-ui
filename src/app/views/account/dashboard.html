@@ -26,7 +26,7 @@
                     <span style="margin-left: .5rem" ng-bind="article.published"></span>
                     <span style="margin-left: .5rem" ng-bind="article.duration"></span>
                 </p>
-                <p class="feed-item__excerpt" ng-bind-html="article.description"></p>
+                <p class="feed-item__excerpt" ng-bind-html="article.excerpt | htmlToPlaintext"></p>
             </div>
         </div>
 
